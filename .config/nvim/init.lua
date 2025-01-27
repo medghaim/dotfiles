@@ -48,3 +48,10 @@ vim.keymap.set('n', '<M-k>', "<cmd>cprev<CR>")
 
 -- Oil shortcut
 vim.keymap.set('n', '-', "<cmd>Oil<CR>")
+
+-- Use internal formatting for bindings like gq - LSP is likely breaking gq.
+vim.api.nvim_create_autocmd('LspAttach', {
+  callback = function(args)
+    vim.bo[args.buf].formatexpr = nil
+  end,
+})

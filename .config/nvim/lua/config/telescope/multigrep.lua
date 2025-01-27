@@ -36,7 +36,7 @@ local live_multigrep = function(opts)
     cwd = opts.cwd,
   }
 
-  local prompt_title = "Grep in " .. opts.cwd
+  local prompt_title = "grep in " .. opts.cwd
 
   pickers.new(opts, {
     debounce = 100,
