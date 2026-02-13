@@ -47,5 +47,10 @@ return {
         ft = { "markdown", "Avante" },
       },
     },
+    config = function()
+      require("avante").setup({
+        provider = "openai"
+      })
+    end,
   }
 }

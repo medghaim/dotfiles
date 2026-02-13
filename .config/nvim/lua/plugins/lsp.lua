@@ -14,6 +14,11 @@
 --	- Move the directory somewhere sensible:
 --     		sudo mv ~/Downloads/lsp-name /usr/local/lsp-name
 --     		sudo ln -s /usr/local/lsp-name/bin/lsp-name /usr/local/bin/lsp-name
+--
+-- NOTE: if you're having trouble jumping to definitions/resolving symbols, ensure
+-- to add these pyenv dirs to the start of your path.
+-- export PATH="$HOME/.pyenv/bin:$HOME/.pyenv/plugins/pyenv-virtualenv/shims:$PATH"
+--
 return {
   {
     "neovim/nvim-lspconfig",
@@ -32,35 +37,27 @@ return {
       },
     },
     config = function()
-      local capabilities = require('blink.cmp').get_lsp_capabilities()
-
       -- Lua LSP
+      local capabilities = require('blink.cmp').get_lsp_capabilities()
       require("lspconfig").lua_ls.setup { capabilites = capabilities }
 
       -- Python LSP
-      require("lspconfig").pylsp.setup {
-        capabilities = capabilities,
-
+      local util = require('lspconfig.util')
+      require 'lspconfig'.pyright.setup {
         settings = {
-          pylsp = {
-            plugins = {
-              -- Formatters
-              black = { enabled = true },
-              autopep8 = { enabled = false },
-              yapf = { enabled = false },
-              -- Linters
-              pylint = { enabled = true, executable = "pylint" },
-              pyflakes = { enabled = false },
-              pycodestyle = { enabled = false },
-              -- Type Checker
-              pylsp_mypy = { enabled = true },
-              -- Autocoomplete
-              jedi_completion = { fuzzy = true },
-              -- Import sorting
-              pyls_isort = { enabled = true },
+          python = {
+            analysis = {
+              autoImportCompletions = true,     -- shows symbols from other modules w/ “(import)”
+              diagnosticMode = "openFilesOnly", -- optional: faster
             },
           },
         },
+        root_dir = function(fname)
+          -- Force root to be at "lumos", no matter which submodule you're in
+          return util.search_ancestors(fname, function(dir)
+            return util.path.is_dir(util.path.join(dir, ".git")) -- or look for your monorepo root
+          end)
+        end,
       }
 
       -- For lua -- autoformat on save

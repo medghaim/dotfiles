@@ -2,11 +2,20 @@
 # PATHS/EXPORTS #
 #################
 
-export PATH=~/bin:$PATH:/usr/local/go/bin:~/.local/bin:~/.poetry/bin
+export PATH=$PATH:/usr/local/go/bin:~/.poetry/bin:~/.local/bin
 export GOPATH=~/go
-export TERM=xterm-256color
+export TERM=screen-256color
 export EDITOR=vim
+export CDPATH=':/home/moody/work/teamlumos:/home/moody/work/teamlumos/lumos/backend/python:/home/moody/work/teamlumos/lumos/backend/python/services'
 export FZF_DEFAULT_OPTS='--height 20% --reverse --border'
+
+#########
+# AGENT #
+#########
+
+# Allows Claude access to LSP plugins
+export ENABLE_LSP_TOOL=1
+
 
 ##########################
 # TERMINAL CONFIGURATION #
@@ -21,6 +30,8 @@ stty -ixon #allows forward recursive search
 
 alias ..='cd ..'
 alias ...='cd ../..'
+
+alias vim='nvim'
 
 alias bashrc='vim ~/.bash_aliases && . ~/.bashrc && echo Bash config editted and reloaded.'
 alias vimrc='vim ~/.vimrc'
@@ -40,7 +51,8 @@ alias dfind='find . -type d -name'
 alias ffind='find . -type f -name'
 
 alias vf='vim $(fzf)'
-alias cf='cd $(find . -type d -print | fzf)'
+#alias cf='cd $(find . /home/moody/work/teamlumos/lumos -type d -print | fzf)'
+alias cf='cd $(find . /home/moody/work/teamlumos/lumos -type d -not -path "*/\.*" -not -path "*/__pycache__*" -not -path "*/.mypy_cache*" -not -path "*/node_modules*" -print | fzf)'
 
 alias crep='grep --exclude=\*.json --exclude=\*.sql --exclude=\*.pyc --exclude=\*.js'
 
@@ -60,24 +72,4 @@ grfix() {
 
     # Execute the git rebase command with --autosquash option
     git rebase -i --autosquash "${commitSHA}~1"
-}
-
-########
-#  GO  #
-########
-go_use() {
-	local input version
-	input=$1
-	case $input in
-		1.18)
-			;;
-		1.19)
-			;;
-		*)
-			echo "no go version set up for $input" >&2
-			return 1
-			;;
-	esac
-
-	ln -sf /home/moody/go/bin/go$input ~/bin/go
 }
