@@ -68,6 +68,41 @@
     ],
     "defaultMode": "acceptEdits"
   },
+  "hooks": {
+    "Stop": [
+      {
+        "matcher": "",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "~/.claude/tmux-notify.sh green"
+          }
+        ]
+      }
+    ],
+    "Notification": [
+      {
+        "matcher": "permission_prompt|elicitation_dialog",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "~/.claude/tmux-notify.sh red"
+          }
+        ]
+      }
+    ],
+    "UserPromptSubmit": [
+      {
+        "matcher": "",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "~/.claude/tmux-notify.sh clear"
+          }
+        ]
+      }
+    ]
+  },
   "model": "opus",
   "enabledPlugins": {
     "code-simplifier@claude-plugins-official": true,
