@@ -1,8 +1,4 @@
 {
-  "statusLine": {
-    "type": "command",
-    "command": "/home/moody/.claude/statusline.sh"
-  },
   "env": {
     "ENABLE_TOOL_SEARCH": "true"
   },
@@ -53,6 +49,75 @@
       "Bash(gh api:*)",
       "Bash(direnv allow:*)",
       "Bash(direnv status:*)",
+      "mcp__snowflake-analytics__query_snowflake",
+      "mcp__snowflake-analytics__describe_table",
+      "mcp__snowflake-analytics__describe_table_local",
+      "mcp__snowflake-analytics__list_tables",
+      "mcp__snowflake-analytics__search_schema",
+      "mcp__snowflake-analytics__search_lumos_models",
+      "mcp__snowflake-analytics__get_table_sample",
+      "mcp__snowflake-analytics__get_column_values",
+      "mcp__snowflake-analytics__get_table_relationships",
+      "mcp__launchdarkly__get_feature_flag",
+      "mcp__launchdarkly__list_feature_flags",
+      "mcp__claude_ai_Slack__slack_search_public",
+      "mcp__claude_ai_Slack__slack_search_public_and_private",
+      "mcp__claude_ai_Slack__slack_read_channel",
+      "mcp__claude_ai_Slack__slack_read_thread",
+      "mcp__claude_ai_Slack__slack_read_user_profile",
+      "mcp__claude_ai_Slack__slack_search_channels",
+      "mcp__claude_ai_Slack__slack_search_users",
+      "mcp__claude_ai_Slack__slack_read_canvas",
+      "mcp__claude_ai_Linear__get_attachment",
+      "mcp__claude_ai_Linear__get_document",
+      "mcp__claude_ai_Linear__get_initiative",
+      "mcp__claude_ai_Linear__get_issue",
+      "mcp__claude_ai_Linear__get_issue_status",
+      "mcp__claude_ai_Linear__get_milestone",
+      "mcp__claude_ai_Linear__get_project",
+      "mcp__claude_ai_Linear__get_project_update",
+      "mcp__claude_ai_Linear__get_team",
+      "mcp__claude_ai_Linear__get_user",
+      "mcp__claude_ai_Linear__list_comments",
+      "mcp__claude_ai_Linear__list_cycles",
+      "mcp__claude_ai_Linear__list_documents",
+      "mcp__claude_ai_Linear__list_initiative_updates",
+      "mcp__claude_ai_Linear__list_initiatives",
+      "mcp__claude_ai_Linear__list_issue_labels",
+      "mcp__claude_ai_Linear__list_issue_statuses",
+      "mcp__claude_ai_Linear__list_issues",
+      "mcp__claude_ai_Linear__list_milestones",
+      "mcp__claude_ai_Linear__list_project_labels",
+      "mcp__claude_ai_Linear__list_project_updates",
+      "mcp__claude_ai_Linear__list_projects",
+      "mcp__claude_ai_Linear__list_teams",
+      "mcp__claude_ai_Linear__list_users",
+      "mcp__claude_ai_Linear__search_documentation",
+      "mcp__claude_ai_Linear__create_comment",
+      "mcp__claude_ai_Linear__create_issue",
+      "mcp__claude_ai_Linear__update_issue",
+      "mcp__claude_ai_Notion__notion-search",
+      "mcp__claude_ai_Notion__notion-fetch",
+      "mcp__claude_ai_Notion__notion-get-users",
+      "mcp__claude_ai_Notion__notion-get-comments",
+      "mcp__claude_ai_Notion__notion-get-teams",
+      "mcp__claude_ai_Notion__notion-query-data-sources",
+      "mcp__claude_ai_Notion__notion-update-page",
+      "mcp__claude_ai_Notion__notion-create-pages",
+      "mcp__claude_ai_Notion__notion-create-comment",
+      "mcp__claude_ai_Notion__notion-duplicate-page",
+      "mcp__claude_ai_Notion__notion-move-pages",
+      "mcp__datadog__get_endpoint_latency_stats",
+      "mcp__datadog__get_error_summary",
+      "mcp__datadog__get_error_tracking_issue",
+      "mcp__datadog__get_error_tracking_summary",
+      "mcp__datadog__get_log_count",
+      "mcp__datadog__get_slow_endpoints",
+      "mcp__datadog__list_error_tracking_issues",
+      "mcp__datadog__query_logs",
+      "mcp__datadog__search_apm_traces",
+      "mcp__datadog__search_error_tracking_issues",
+      "mcp__datadog__search_logs",
       "WebSearch"
     ],
     "deny": [
@@ -64,7 +129,17 @@
       "Bash(curl:*)"
     ],
     "ask": [
-      "Bash(rm:*)"
+      "Bash(rm:*)",
+      "mcp__claude_ai_Slack__slack_send_message",
+      "mcp__claude_ai_Slack__slack_send_message_draft",
+      "mcp__claude_ai_Slack__slack_create_canvas",
+      "mcp__claude_ai_Linear__update_project",
+      "mcp__claude_ai_Linear__create_project",
+      "mcp__claude_ai_Linear__create_document",
+      "mcp__claude_ai_Linear__update_document",
+      "mcp__launchdarkly__create_feature_flag",
+      "mcp__launchdarkly__update_feature_flag",
+      "mcp__launchdarkly__toggle_feature_flag"
     ],
     "defaultMode": "acceptEdits"
   },
@@ -104,9 +179,24 @@
     ]
   },
   "model": "opus",
+  "statusLine": {
+    "type": "command",
+    "command": "/home/moody/.claude/statusline.sh"
+  },
   "enabledPlugins": {
     "code-simplifier@claude-plugins-official": true,
     "pyright-lsp@claude-plugins-official": true,
-    "superpowers@claude-plugins-official": true
+    "lumos-safety@lumos-marketplace": true,
+    "lumos-core@lumos-marketplace": true,
+    "superpowers@claude-plugins-official": true,
+    "code-review@claude-plugins-official": true
+  },
+  "extraKnownMarketplaces": {
+    "lumos-marketplace": {
+      "source": {
+        "source": "github",
+        "repo": "teamlumos/claude-marketplace"
+      }
+    }
   }
 }
