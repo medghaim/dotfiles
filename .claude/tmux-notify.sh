@@ -28,6 +28,16 @@ case "$ACTION" in
         tmux set-window-option -t "$TMUX_PANE" -u window-status-current-style 2>/dev/null
         tmux set-window-option -t "$TMUX_PANE" -u window-status-current-format 2>/dev/null
         ;;
+    clear-red)
+        # Only clear if the current state is red (don't clear green)
+        STATUS=$(tmux show-window-option -t "$TMUX_PANE" -v @claude_notify 2>/dev/null)
+        if [ "$STATUS" = "red" ]; then
+            tmux set-window-option -t "$TMUX_PANE" -u @claude_notify 2>/dev/null
+            tmux set-window-option -t "$TMUX_PANE" -u window-status-style 2>/dev/null
+            tmux set-window-option -t "$TMUX_PANE" -u window-status-current-style 2>/dev/null
+            tmux set-window-option -t "$TMUX_PANE" -u window-status-current-format 2>/dev/null
+        fi
+        ;;
     focus)
         # Called by tmux session-window-changed hook
         # Clear green (informational), keep red (needs response)
